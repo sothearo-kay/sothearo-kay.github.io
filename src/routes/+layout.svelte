@@ -2,6 +2,10 @@
 	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import '../app.css';
+	import '@fontsource/roboto';
+	import '@fontsource/roboto/700.css';
+	import '@fontsource/jetbrains-mono';
+	import '@fontsource/jetbrains-mono/500.css';
 
 	let { children } = $props();
 
