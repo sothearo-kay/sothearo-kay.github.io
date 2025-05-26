@@ -1,10 +1,16 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 	import { fly } from 'svelte/transition';
-	import { getThemeContext } from '$lib/context/theme.svelte';
+	import { theme } from '$lib/stores/theme.svelte';
 	import { Moon, Sun } from '@lucide/svelte';
 
-	const themeStore = getThemeContext();
+	let githubIcon = $state('/github_dark.svg');
+
+	$effect(() => {
+		if (!browser) return;
+		githubIcon = theme.current === 'dark' ? '/github_light.svg' : '/github_dark.svg';
+	});
 
 	const navMenu = [
 		{ label: 'Home', path: '/' },
@@ -36,19 +42,15 @@
 				class="flex-center h-8 w-8 rounded-full border"
 				onclick={() => window.open('https://github.com/sothearo-kay', '_self')}
 			>
-				<img
-					src={themeStore.current === 'dark' ? '/github_light.svg' : '/github_dark.svg'}
-					alt="GitHub logo"
-					class="h-4 w-4"
-				/>
+				<img src={githubIcon} alt="GitHub logo" class="h-4 w-4" />
 			</button>
 
 			<button
 				aria-label="Toggle Theme"
 				class="flex-center relative h-8 w-8 overflow-hidden rounded-full border"
-				onclick={themeStore.toggle}
+				onclick={theme.toggle}
 			>
-				{#if themeStore.current === 'dark'}
+				{#if theme.current === 'dark'}
 					<div in:fly={{ y: 10 }}>
 						<Sun class="h-4 w-4" />
 					</div>

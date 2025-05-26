@@ -59,6 +59,11 @@
 		min-height: 100vh;
 		background-color: var(--color-background);
 		color: var(--color-foreground);
+	}
+
+	body {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 		transition: 300ms;
 	}
 

@@ -1,17 +1,13 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
-	import { setThemeContext } from '$lib/context/theme.svelte';
 	import Header from '$lib/components/header.svelte';
-	import type { LayoutProps } from './$types';
 	import '../app.css';
 	import '@fontsource/roboto';
 	import '@fontsource/roboto/700.css';
 	import '@fontsource/jetbrains-mono';
 	import '@fontsource/jetbrains-mono/500.css';
 
-	let { data, children }: LayoutProps = $props();
-
-	setThemeContext(data.colorScheme);
+	let { children } = $props();
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
