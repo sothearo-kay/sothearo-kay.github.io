@@ -1,31 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { fly } from 'svelte/transition';
-	import { theme, themeOptions, applyTheme } from '$lib/stores/theme.svelte';
+	import { getThemeContext } from '$lib/context/theme.svelte';
+	import { Moon, Sun } from '@lucide/svelte';
 
-	interface Props {
-		currentThemeIndex: number;
-		showTransition: boolean;
-	}
-
-	const { currentThemeIndex, showTransition }: Props = $props();
-
-	let currentIndex = $derived(currentThemeIndex);
-	let ThemeIcon = $derived(themeOptions[currentIndex].Icon);
+	const themeStore = getThemeContext();
 
 	const navMenu = [
-		{ label: 'home', path: '/' },
-		{ label: 'blog', path: '/blog' }
+		{ label: 'Home', path: '/' },
+		{ label: 'Blog', path: '/blog' },
+		{ label: 'Projects', path: '/projects' }
 	];
-
-	const toggleTheme = () => {
-		currentIndex = (currentIndex + 1) % themeOptions.length;
-		const next = themeOptions[currentIndex];
-		applyTheme(next.value);
-	};
 </script>
 
-<header class="bg-bg" style="view-transition-name: header;">
+<header class="sticky top-0 backdrop-blur-xl" style="view-transition-name: header;">
 	<div class="container grid grid-cols-[100px_1fr_100px] items-center">
 		<div></div>
 
@@ -36,7 +24,7 @@
 						aria-current={page.url.pathname === navItem.path ? 'page' : undefined}
 						class="relative h-full"
 					>
-						<a href={navItem.path} class="flex h-full items-center px-2">{navItem.label}</a>
+						<a href={navItem.path} class="flex h-full items-center px-4">{navItem.label}</a>
 					</li>
 				{/each}
 			</ul>
@@ -49,7 +37,7 @@
 				onclick={() => window.open('https://github.com/sothearo-kay', '_self')}
 			>
 				<img
-					src={theme.value === 'dark' ? '/github_light.svg' : '/github_dark.svg'}
+					src={themeStore.current === 'dark' ? '/github_light.svg' : '/github_dark.svg'}
 					alt="GitHub logo"
 					class="h-4 w-4"
 				/>
@@ -58,17 +46,17 @@
 			<button
 				aria-label="Toggle Theme"
 				class="flex-center relative h-8 w-8 overflow-hidden rounded-full border"
-				onclick={toggleTheme}
+				onclick={themeStore.toggle}
 			>
-				{#key currentIndex}
-					<div
-						in:fly={showTransition ? { y: -15, opacity: 0 } : undefined}
-						out:fly={showTransition ? { y: 15, opacity: 0 } : undefined}
-						class="absolute flex items-center justify-center"
-					>
-						<ThemeIcon class="h-4 w-4" />
+				{#if themeStore.current === 'dark'}
+					<div in:fly={{ y: 10 }}>
+						<Sun class="h-4 w-4" />
 					</div>
-				{/key}
+				{:else}
+					<div in:fly={{ y: -10 }}>
+						<Moon class="h-4 w-4" />
+					</div>
+				{/if}
 			</button>
 		</div>
 	</div>

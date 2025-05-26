@@ -1,25 +1,17 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
-	import { initTheme } from '$lib/stores/theme.svelte';
+	import { setThemeContext } from '$lib/context/theme.svelte';
 	import Header from '$lib/components/header.svelte';
+	import type { LayoutProps } from './$types';
 	import '../app.css';
 	import '@fontsource/roboto';
 	import '@fontsource/roboto/700.css';
 	import '@fontsource/jetbrains-mono';
 	import '@fontsource/jetbrains-mono/500.css';
 
-	let { children } = $props();
-	let currentThemeIndex = $state(0);
-	let showTransition = $state(false);
+	let { data, children }: LayoutProps = $props();
 
-	$effect(() => {
-		if (typeof window === 'undefined') return;
-		currentThemeIndex = initTheme();
-
-		requestAnimationFrame(() => {
-			showTransition = true;
-		});
-	});
+	setThemeContext(data.colorScheme);
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
@@ -33,7 +25,8 @@
 	});
 </script>
 
-<Header {currentThemeIndex} {showTransition} />
+<Header />
+
 <main class="container py-10">
 	{@render children()}
 </main>
