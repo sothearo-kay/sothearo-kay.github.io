@@ -5,8 +5,13 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  build_site:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,28 +31,24 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: build
+      - name: Build
         run: pnpm build
 
-      - name: Upload Artifacts
+      - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # this should match the `pages` option in your adapter-static options
-          path: 'build/'
+          name: github-pages
+          path: build
 
   deploy:
-    needs: build_site
+    needs: build
     runs-on: ubuntu-latest
-
-    permissions:
-      pages: write
-      id-token: write
 
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
