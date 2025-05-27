@@ -25,7 +25,7 @@
 <div class="grid size-full grid-rows-[auto_1fr_auto]">
 	<Header />
 
-	<main class="container py-10">
+	<main class="container py-4">
 		{@render children()}
 	</main>
 

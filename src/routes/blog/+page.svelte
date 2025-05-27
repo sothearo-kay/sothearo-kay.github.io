@@ -7,7 +7,7 @@
 
 <section>
 	<h1>Blog</h1>
-	<ul class="divide-y divide-dashed">
+	<ul class="divide-y divide-dashed [&>li]:last:pb-0">
 		{#each data.posts as post (post.slug)}
 			<li class="py-6">
 				<div class="mb-1">

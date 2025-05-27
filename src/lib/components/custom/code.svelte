@@ -24,8 +24,8 @@
 		aria-label="Copy to clipboard"
 		disabled={copied}
 		class={[
-			'flex-center absolute top-3 right-3 z-10 h-8 w-8 rounded border opacity-0 transition-[opacity,border-color] group-hover:opacity-100',
-			'hover:enabled:border-text-highlight disabled:cursor-not-allowed disabled:opacity-50'
+			'flex-center absolute top-3 right-3 z-10 h-8 w-8 rounded border opacity-0 transition-[opacity,border-color]',
+			' hover:enabled:border-text-highlight group-hover:opacity-100 disabled:cursor-not-allowed'
 		]}
 		onclick={copyToClipboard}
 	>
