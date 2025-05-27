@@ -112,8 +112,6 @@
 		font-weight: 400;
 	}
 
-	code,
-	pre,
 	li {
 		font-family: var(--font-mono);
 		font-weight: 400;
@@ -140,6 +138,20 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.underline-swipe {
+		position: relative;
+		display: inline;
+		background-image: linear-gradient(to right, currentColor, currentColor);
+		background-repeat: no-repeat;
+		background-position: left bottom;
+		background-size: 0% var(--underline-height);
+		transition: background-size 0.25s ease-in-out;
+	}
+
+	.underline-swipe:hover {
+		background-size: 100% var(--underline-height);
 	}
 
 	.prose {
@@ -191,6 +203,13 @@
 			border-radius: 10px;
 			tab-size: 2;
 			transition: 150ms;
+
+			& span {
+				font-family: var(--font-mono);
+				font-weight: 400;
+				font-size: 0.875rem;
+				letter-spacing: 0.05em;
+			}
 		}
 
 		table {

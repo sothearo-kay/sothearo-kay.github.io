@@ -1,11 +1,14 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { formatDate } from '$lib/utils/date';
+	import { ChevronRight } from '@lucide/svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 
 	let wordCount = $derived(data.rawContent.split(' ').length);
 	let estimatedReadingTime = $derived(wordCount / 250);
+	let segments = $derived(page.url.pathname.split('/').filter(Boolean));
 </script>
 
 <svelte:head>
@@ -14,7 +17,24 @@
 	<meta property="og:title" content={data.meta.title} />
 </svelte:head>
 
-<nav></nav>
+<nav aria-label="Breadcrumb" class="mb-4">
+	<ol class="flex items-center text-sm">
+		{#each segments as segment, i (segment)}
+			<li class="flex items-center">
+				<a
+					href={'/' + segments.slice(0, i + 1).join('/')}
+					class="underline-swipe text-text-highlight capitalize"
+					style="--underline-height: 1px;"
+				>
+					{i === segments.length - 1 ? data.meta.title : segment}
+				</a>
+				{#if i < segments.length - 1}
+					<ChevronRight class="mx-1 h-4 w-4" />
+				{/if}
+			</li>
+		{/each}
+	</ol>
+</nav>
 
 <article>
 	<hgroup>

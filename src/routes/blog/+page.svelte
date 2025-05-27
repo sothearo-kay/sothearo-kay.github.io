@@ -5,7 +5,7 @@
 	let { data }: PageProps = $props();
 </script>
 
-<section style="--underline-height: 2px; --underline-color: currentColor">
+<section>
 	<h1>Blog</h1>
 	<ul class="divide-y divide-dashed">
 		{#each data.posts as post (post.slug)}
@@ -14,7 +14,13 @@
 					<small>{formatDate(post.date)}</small>
 					<small></small>
 				</div>
-				<a class="underline-swipe text-2xl font-medium" href={`blog/${post.slug}`}>{post.title}</a>
+				<a
+					href={`blog/${post.slug}`}
+					class="underline-swipe text-2xl font-medium"
+					style="--underline-height: 2px;"
+				>
+					{post.title}
+				</a>
 				<p class="my-2">{post.description}</p>
 				{#if post.tags?.length}
 					<div class="flex gap-x-3 text-sm transition-colors">
@@ -31,17 +37,4 @@
 </section>
 
 <style>
-	.underline-swipe {
-		position: relative;
-		display: inline;
-		background-image: linear-gradient(to right, var(--underline-color), var(--underline-color));
-		background-repeat: no-repeat;
-		background-position: left bottom;
-		background-size: 0% var(--underline-height);
-		transition: background-size 0.25s ease-in-out;
-	}
-
-	.underline-swipe:hover {
-		background-size: 100% var(--underline-height);
-	}
 </style>
