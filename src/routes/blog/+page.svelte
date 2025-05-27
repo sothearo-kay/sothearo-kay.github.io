@@ -5,7 +5,7 @@
 	let { data }: PageProps = $props();
 </script>
 
-<section>
+<section style="--underline-height: 2px; --underline-color: currentColor">
 	<h1>Blog</h1>
 	<ul class="divide-y divide-dashed">
 		{#each data.posts as post (post.slug)}
@@ -17,9 +17,11 @@
 				<a class="underline-swipe text-2xl font-medium" href={`blog/${post.slug}`}>{post.title}</a>
 				<p class="my-2">{post.description}</p>
 				{#if post.tags?.length}
-					<div class="flex gap-x-3 transition-colors">
+					<div class="flex gap-x-3 text-sm transition-colors">
 						{#each post.tags as tag (tag)}
-							<small class="bg-highlight text-text-highlight rounded px-1 py-0.5">{tag}</small>
+							<span class="bg-highlight text-text-highlight rounded px-1 py-0.5 font-mono">
+								&num;{tag}
+							</span>
 						{/each}
 					</div>
 				{/if}
@@ -29,11 +31,6 @@
 </section>
 
 <style>
-	:root {
-		--underline-height: 2px;
-		--underline-color: currentColor;
-	}
-
 	.underline-swipe {
 		position: relative;
 		display: inline;
