@@ -45,6 +45,7 @@
 		"700.css": "link:@fontsource/roboto/700.css",
 		"@fontsource/jetbrains-mono": "^5.2.5",
 		"@fontsource/roboto": "^5.2.5",
-		"@lucide/svelte": "^0.511.0"
+		"@lucide/svelte": "^0.511.0",
+		"shiki": "^3.4.2"
 	}
 }
