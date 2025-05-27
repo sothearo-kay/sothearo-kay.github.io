@@ -19,7 +19,7 @@
 	];
 </script>
 
-<header class="sticky top-0 backdrop-blur-xl" style="view-transition-name: header;">
+<header class="sticky top-0 backdrop-blur-md" style="view-transition-name: header;">
 	<div class="container grid grid-cols-[100px_1fr_100px] items-center">
 		<div></div>
 

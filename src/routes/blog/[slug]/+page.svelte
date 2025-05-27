@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { formatDate } from '$lib/utils/date';
-	import { ChevronRight } from '@lucide/svelte';
+	import { ChevronRight, Calendar, Clock } from '@lucide/svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -38,11 +38,16 @@
 
 <article>
 	<hgroup>
-		<h1>{data.meta.title}</h1>
-		<p class="text-secondary mt-1 mb-2 flex gap-2">
-			<span>Published at {formatDate(data.meta.date)}</span>
-			<span>&middot;</span>
-			<span>Reading time: {Math.round(estimatedReadingTime)} minutes</span>
+		<h1 class="font-mono text-3xl">{data.meta.title}</h1>
+		<p class="text-secondary mt-1 mb-2 flex gap-4 text-sm">
+			<span class="inline-flex items-center gap-1">
+				<Calendar class="h-4 w-4" />
+				{formatDate(data.meta.date)}
+			</span>
+			<span class="inline-flex items-center gap-1">
+				<Clock class="h-4 w-4" />
+				{Math.round(estimatedReadingTime)} min read
+			</span>
 		</p>
 	</hgroup>
 
