@@ -54,6 +54,11 @@
 		cursor: pointer;
 	}
 
+	::selection {
+		background: var(--color-text-highlight);
+		color: var(--color-bg);
+	}
+
 	html,
 	body {
 		min-height: 100vh;
