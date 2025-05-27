@@ -11,6 +11,7 @@
 	--color-highlight: var(--color-highlight);
 	--color-text-highlight: var(--color-text-highlight);
 	--color-table-heading: var(--color-table-heading);
+	--color-muted: var(--color-muted);
 }
 
 @theme {
@@ -32,6 +33,7 @@
 		--color-highlight: rgba(136, 57, 239, 0.15);
 		--color-text-highlight: #8839ef;
 		--color-table-heading: #2a2a2a;
+		--color-muted: #e6e9ef;
 
 		@variant dark {
 			--color-bg: #11111b;
@@ -41,6 +43,7 @@
 			--color-highlight: rgba(203, 166, 247, 0.25);
 			--color-text-highlight: #cba6f7;
 			--color-table-heading: #e2e8f0;
+			--color-muted: --color-muted: #1e1e2e;
 		}
 	}
 
@@ -198,6 +201,7 @@
 		}
 
 		pre {
+			overflow-x: auto;
 			max-inline-size: 100%;
 			padding: 1rem;
 			border-radius: 10px;
@@ -225,12 +229,12 @@
 
 			th {
 				text-align: left;
-				padding: 0.4rem 0.7rem;
+				padding: 0.4rem 0.8rem;
 				border-bottom: 2px solid var(--color-table-heading);
 			}
 
 			td {
-				padding: 0.2rem 0.7rem;
+				padding: 0.2rem 0.8rem;
 			}
 
 			tr {

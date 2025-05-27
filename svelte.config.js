@@ -2,27 +2,34 @@ import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
+import { join } from 'path';
+
+const themes = ['catppuccin-latte', 'catppuccin-mocha']; // light and dark
+const highlighter = await createHighlighter({
+	themes,
+	langs: ['javascript', 'typescript']
+});
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
-			const highlighter = await createHighlighter({
-				themes: ['catppuccin-latte', 'catppuccin-mocha'], // light and dark
-				langs: ['javascript', 'typescript']
-			});
+			const html = escapeSvelte(
+				highlighter.codeToHtml(code, {
+					lang,
+					themes: {
+						light: 'catppuccin-latte',
+						dark: 'catppuccin-mocha'
+					}
+				})
+			);
 
-			const html = highlighter.codeToHtml(code, {
-				lang,
-				themes: {
-					light: 'catppuccin-latte',
-					dark: 'catppuccin-mocha'
-				}
-			});
-
-			return `{@html \`${escapeSvelte(html)}\`}`;
+			return `<Components.pre code={\`${code}\`} lang="${lang}">{@html \`${html}\`}</Components.pre>`;
 		}
+	},
+	layout: {
+		_: join(import.meta.dirname, './src/mdsvex.svelte')
 	}
 };
 
