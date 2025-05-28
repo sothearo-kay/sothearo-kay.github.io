@@ -28,6 +28,7 @@ export const remarkHeadings = () => {
 			headings.push({ text, depth, slug });
 		});
 
-		file.data.headings = headings;
+		file.data.fm = file.data.fm || {};
+		file.data.fm.headings = headings;
 	};
 };
