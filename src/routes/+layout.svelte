@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
 	import Header from '$lib/components/header.svelte';
+	import Footer from '$lib/components/footer.svelte';
 	import '../app.css';
 	import '@fontsource/roboto';
 	import '@fontsource/roboto/700.css';
@@ -21,11 +22,15 @@
 	});
 </script>
 
-<Header />
+<div class="grid size-full grid-rows-[auto_1fr_auto]">
+	<Header />
 
-<main class="container py-10">
-	{@render children()}
-</main>
+	<main class="container py-4">
+		{@render children()}
+	</main>
+
+	<Footer />
+</div>
 
 <style>
 	@keyframes fade-in {

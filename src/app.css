@@ -10,6 +10,8 @@
 	--color-tertiary: var(--color-tertiary);
 	--color-highlight: var(--color-highlight);
 	--color-text-highlight: var(--color-text-highlight);
+	--color-table-heading: var(--color-table-heading);
+	--color-muted: var(--color-muted);
 }
 
 @theme {
@@ -24,21 +26,34 @@
 
 @layer base {
 	:root {
-		--color-bg: #eff1f5;
+		--color-bg: #f7f9fc;
 		--color-text: #4c4f69;
 		--color-secondary: #9ca0b0;
 		--color-tertiary: #7c7f93;
 		--color-highlight: rgba(136, 57, 239, 0.15);
 		--color-text-highlight: #8839ef;
+		--color-table-heading: #2a2a2a;
+		--color-muted: #a0a2ad;
 
 		@variant dark {
 			--color-bg: #11111b;
 			--color-text: #cdd6f4;
 			--color-secondary: #a6adc8;
 			--color-tertiary: #9399b2;
-			--color-highlight: rgba(203, 166, 247, 0.15);
+			--color-highlight: rgba(203, 166, 247, 0.25);
 			--color-text-highlight: #cba6f7;
+			--color-table-heading: #e2e8f0;
+			--color-muted: #7f869b;
 		}
+	}
+
+	html.dark .shiki,
+	html.dark .shiki span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
 	}
 
 	*,
@@ -54,6 +69,11 @@
 		cursor: pointer;
 	}
 
+	::selection {
+		background: var(--color-text-highlight);
+		color: var(--color-bg);
+	}
+
 	html,
 	body {
 		min-height: 100vh;
@@ -64,13 +84,13 @@
 	body {
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		transition: 300ms;
+		transition: 150ms;
 	}
 
 	h1,
 	h2,
 	h3 {
-		font-family: 'Roboto', sans-serif;
+		font-family: var(--font-sans);
 		font-weight: 700;
 	}
 
@@ -91,28 +111,26 @@
 
 	p,
 	span {
-		font-family: 'Roboto', sans-serif;
+		font-family: var(--font-sans);
 		font-weight: 400;
 	}
 
-	code,
-	pre,
 	li {
-		font-family: 'JetBrains Mono', monospace;
+		font-family: var(--font-mono);
 		font-weight: 400;
 	}
 
 	.subheading,
 	time,
 	small {
-		font-family: 'JetBrains Mono', monospace;
+		font-family: var(--font-mono);
 		font-weight: 500;
 		font-size: 0.875rem;
 		letter-spacing: 0.05em;
 	}
 
 	a {
-		font-family: 'JetBrains Mono', monospace;
+		font-family: var(--font-mono);
 		font-weight: 500;
 		color: inherit;
 	}
@@ -123,5 +141,125 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.underline-swipe {
+		position: relative;
+		display: inline;
+		background-image: linear-gradient(to right, currentColor, currentColor);
+		background-repeat: no-repeat;
+		background-position: left bottom;
+		background-size: 0% var(--underline-height);
+		transition: background-size 0.25s ease-in-out;
+	}
+
+	.underline-swipe:hover {
+		background-size: 100% var(--underline-height);
+	}
+
+	.prose {
+		color: var(--color-text);
+		font-family: var(--font-sans);
+		font-weight: 400;
+		line-height: 1.6;
+
+		:is(h2, h3, h4, h5, h6) {
+			font-family: var(--font-mono);
+			font-weight: 700;
+			margin-top: 1em;
+			margin-bottom: 0.75em;
+			color: var(--color-foreground);
+			max-width: max-content;
+			text-decoration: underline;
+			text-decoration-style: dashed;
+			text-underline-offset: 8px;
+			scroll-margin-top: 4rem;
+		}
+
+		h2 {
+			@apply text-2xl;
+		}
+
+		p {
+			:not(:is(h2, h3, h4, h5, h6) + p) {
+				margin-top: 1.75rem;
+			}
+
+			/* unwrap paragraph wrapping images */
+			&:has(img) {
+				display: contents;
+			}
+		}
+
+		ul,
+		ol {
+			list-style-type: '🤐';
+			padding-inline-start: 1.25rem;
+			margin-top: 1em;
+			margin-bottom: 1em;
+		}
+
+		ul li,
+		ol li {
+			margin-block: 0.5rem;
+			padding-inline-start: 0.5rem;
+		}
+
+		pre {
+			overflow-x: auto;
+			max-inline-size: 100%;
+			padding: 1rem;
+			border-radius: 10px;
+			tab-size: 2;
+			transition: 150ms;
+
+			& span {
+				font-family: var(--font-mono);
+				font-weight: 400;
+				font-size: 0.875rem;
+				letter-spacing: 0.05em;
+			}
+		}
+
+		table {
+			overflow-x: auto;
+			margin: 1rem;
+			padding: 1.5rem;
+			border-collapse: collapse;
+
+			th,
+			td {
+				min-width: 75px;
+			}
+
+			th {
+				text-align: left;
+				padding: 0.4rem 0.8rem;
+				border-bottom: 2px solid var(--color-table-heading);
+			}
+
+			td {
+				padding: 0.2rem 0.8rem;
+			}
+
+			tr {
+				border-bottom: 1px solid var(--color-highlight);
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+
+			& > * {
+				line-height: 2rem;
+			}
+		}
+
+		hr {
+			width: 100%;
+			margin: 2rem auto;
+			height: 1px;
+			border: none;
+			background-color: var(--color-highlight);
+		}
 	}
 }
