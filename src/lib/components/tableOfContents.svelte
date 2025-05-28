@@ -6,26 +6,31 @@
 	interface Props {
 		headings: HeadingData[];
 	}
-
 	let { headings }: Props = $props();
 
 	let collapsed = $state(false);
-	let activeSlug = $state<string | null>(null);
+	let visibleSlugs = $state<string[]>([]);
 
 	onMount(() => {
+		const visibleSet = new Set<string>();
 		const observer = new IntersectionObserver(
 			(entries) => {
-				const visible = entries
-					.filter((entry) => entry.isIntersecting)
-					.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+				for (const entry of entries) {
+					const slug = entry.target.id;
+					if (!slug) continue;
 
-				if (visible.length > 0) {
-					activeSlug = visible[0].target.id;
+					if (entry.isIntersecting) {
+						visibleSet.add(slug);
+					} else {
+						visibleSet.delete(slug);
+					}
 				}
+
+				visibleSlugs = [...visibleSet];
 			},
 			{
 				rootMargin: '0px 0px -20% 0px',
-				threshold: 0.5
+				threshold: 0.1
 			}
 		);
 
@@ -40,12 +45,12 @@
 	function scrollToHeading(slug: string) {
 		const el = document.getElementById(slug);
 		if (el) {
-			el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+			el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}
 	}
 </script>
 
-<nav aria-label="Table of Contents" class="sticky top-17">
+<nav aria-label="Table of Contents" class="sticky top-17 p-4">
 	<button class="flex w-full items-center justify-between" onclick={() => (collapsed = !collapsed)}>
 		<p class="font-mono font-medium">Table of Contents</p>
 		<ChevronRight
@@ -63,13 +68,14 @@
 			{#each headings as { text, slug, depth } (slug)}
 				<li
 					class={[
-						'hover:text-foreground ml-[var(--size)] font-sans font-bold transition-colors',
-						{ 'text-muted': slug !== activeSlug }
+						'hover:text-foreground ml-[var(--size)] font-sans font-bold transition-colors duration-300',
+						{ 'text-muted': !visibleSlugs.includes(slug) }
 					]}
 					style="--size: calc(1rem * {depth});"
 				>
 					<button
 						class="underline-swipe"
+						data-slug={slug}
 						style="--underline-height: 2px;"
 						onclick={() => scrollToHeading(slug)}
 					>

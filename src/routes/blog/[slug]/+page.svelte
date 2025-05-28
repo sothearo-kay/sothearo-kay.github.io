@@ -2,8 +2,8 @@
 	import { page } from '$app/state';
 	import { formatDate } from '$lib/utils/date';
 	import { Calendar, Clock } from '@lucide/svelte';
-	import TableOfContent from '$lib/components/tableOfContent.svelte';
 	import BreadCrumb from '$lib/components/breadCrumb.svelte';
+	import TableOfContents from '$lib/components/tableOfContents.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -54,5 +54,5 @@
 		</article>
 	</div>
 
-	<TableOfContent headings={data.meta.headings} />
+	<TableOfContents headings={data.meta.headings} />
 </section>
