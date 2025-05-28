@@ -3,6 +3,8 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
 import { join } from 'path';
+import { remarkHeadings } from './plugins/remark-headings.js';
+import rehypeSlug from 'rehype-slug';
 
 const themes = ['catppuccin-latte', 'catppuccin-mocha']; // light and dark
 const highlighter = await createHighlighter({
@@ -13,6 +15,8 @@ const highlighter = await createHighlighter({
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
+	remarkPlugins: [remarkHeadings],
+	rehypePlugins: [rehypeSlug],
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
 			const html = escapeSvelte(
