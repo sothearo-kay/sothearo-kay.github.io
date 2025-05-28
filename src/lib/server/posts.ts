@@ -1,6 +1,6 @@
 import type { PostMetadata } from '$lib/types/post';
 
-export async function getPosts() {
+export function getPosts() {
 	let posts: PostMetadata[] = [];
 
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true });
