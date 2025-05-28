@@ -33,7 +33,7 @@
 		--color-highlight: rgba(136, 57, 239, 0.15);
 		--color-text-highlight: #8839ef;
 		--color-table-heading: #2a2a2a;
-		--color-muted: #e6e9ef;
+		--color-muted: #a0a2ad;
 
 		@variant dark {
 			--color-bg: #11111b;
@@ -43,7 +43,7 @@
 			--color-highlight: rgba(203, 166, 247, 0.25);
 			--color-text-highlight: #cba6f7;
 			--color-table-heading: #e2e8f0;
-			--color-muted: --color-muted: #1e1e2e;
+			--color-muted: #7f869b;
 		}
 	}
 
@@ -173,6 +173,7 @@
 			text-decoration: underline;
 			text-decoration-style: dashed;
 			text-underline-offset: 8px;
+			scroll-margin-top: 4rem;
 		}
 
 		h2 {
@@ -192,7 +193,7 @@
 
 		ul,
 		ol {
-			list-style-type: '🔥';
+			list-style-type: '🤐';
 			padding-inline-start: 1.25rem;
 			margin-top: 1em;
 			margin-bottom: 1em;

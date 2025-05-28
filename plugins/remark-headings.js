@@ -18,7 +18,7 @@ export const remarkHeadings = () => {
 
 		visit(tree, 'heading', (node) => {
 			const text = toString(node);
-			const depth = node.depth;
+			const depth = node.depth - 2; // start from h2
 			const slug = text
 				.toLowerCase()
 				.replace(/[^\w\s-]/g, '')
