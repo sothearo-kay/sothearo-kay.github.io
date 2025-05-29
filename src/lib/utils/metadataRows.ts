@@ -3,8 +3,8 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 		type: 'svg',
 		props: {
 			xmlns: 'http://www.w3.org/2000/svg',
-			width: 18,
-			height: 18,
+			width: 28,
+			height: 28,
 			viewBox: '0 0 24 24',
 			fill: 'none',
 			stroke: 'currentColor',
@@ -24,8 +24,8 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 		type: 'svg',
 		props: {
 			xmlns: 'http://www.w3.org/2000/svg',
-			width: 18,
-			height: 18,
+			width: 28,
+			height: 28,
 			viewBox: '0 0 24 24',
 			fill: 'none',
 			stroke: 'currentColor',
@@ -47,9 +47,8 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 				justifyContent: 'space-between',
 				alignItems: 'center',
 				borderTop: '1px solid rgba(136, 57, 239, 0.15)',
-				paddingTop: '12px',
+				paddingTop: '24px',
 				marginTop: 'auto',
-				fontSize: '14px',
 				color: '#9ca0b0'
 			},
 			children: [
@@ -65,14 +64,14 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 							{
 								type: 'div',
 								props: {
-									style: { display: 'flex', alignItems: 'center', gap: '4px' },
+									style: { display: 'flex', alignItems: 'center', gap: '4px', fontSize: '28px' },
 									children: [calendarIcon, { type: 'span', props: { children: post.date } }]
 								}
 							},
 							{
 								type: 'div',
 								props: {
-									style: { display: 'flex', alignItems: 'center', gap: '4px' },
+									style: { display: 'flex', alignItems: 'center', gap: '4px', fontSize: '28px' },
 									children: [
 										clockIcon,
 										{ type: 'span', props: { children: `${post.readingTime} min read` } }
@@ -85,12 +84,13 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 				{
 					type: 'div',
 					props: {
-						style: { display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' },
+						style: { display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' },
 						children: post.tags.map((tag) => ({
 							type: 'div',
 							props: {
 								style: {
 									fontFamily: 'JetBrains Mono',
+									fontSize: '28px',
 									color: '#8839ef',
 									backgroundColor: 'rgba(136, 57, 239, 0.15)',
 									padding: '2px 6px',

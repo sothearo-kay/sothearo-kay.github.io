@@ -1,4 +1,5 @@
 import satori from 'satori';
+import sharp from 'sharp';
 import { Resvg } from '@resvg/resvg-js';
 import { read } from '$app/server';
 import { getPosts } from '$lib/server/posts.js';
@@ -40,37 +41,39 @@ export const GET: RequestHandler = async ({ params }) => {
 					height: '100%',
 					display: 'flex',
 					flexDirection: 'column',
-					padding: '16px',
-					paddingBottom: '24px',
+					padding: '32px',
 					backgroundColor: '#f7f9fc'
 				},
 				children: [
 					{
 						type: 'div',
 						props: {
-							style: { display: 'flex', alignItems: 'center', gap: '12px' },
+							style: { display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' },
 							children: [
 								{
 									type: 'img',
 									props: {
 										src: 'https://api.dicebear.com/9.x/thumbs/png?seed=Sothearo&backgroundColor=000000',
-										width: 24,
-										height: 24,
+										width: 52,
+										height: 52,
 										style: { borderRadius: '9999px' }
 									}
 								},
-								{ type: 'p', props: { children: baseUrl } }
+								{
+									type: 'p',
+									props: { style: { fontSize: '32px', color: '#9ca0b0' }, children: baseUrl }
+								}
 							]
 						}
 					},
 					{
 						type: 'h1',
 						props: {
-							style: { fontFamily: 'JetBrains Mono', fontSize: '26px', margin: 0 },
+							style: { fontFamily: 'JetBrains Mono', fontSize: '52px', margin: 0 },
 							children: post.title
 						}
 					},
-					{ type: 'p', props: { children: post.description } },
+					{ type: 'p', props: { style: { fontSize: '32px' }, children: post.description } },
 					createMetadataRow({
 						date: post.date,
 						readingTime: estimatedReadingTime.toString(),
@@ -80,8 +83,8 @@ export const GET: RequestHandler = async ({ params }) => {
 			}
 		},
 		{
-			width: 600,
-			height: 315,
+			width: 1200,
+			height: 630,
 			fonts: [
 				{
 					name: 'Roboto',
@@ -99,7 +102,8 @@ export const GET: RequestHandler = async ({ params }) => {
 		}
 	);
 
-	const ogImage = new Resvg(svg).render().asPng();
+	const pngBuffer = new Resvg(svg).render().asPng();
+	const ogImage = await sharp(pngBuffer).jpeg({ quality: 100 }).toBuffer();
 
 	return new Response(ogImage, {
 		headers: {
