@@ -1,5 +1,4 @@
 import satori from 'satori';
-import sharp from 'sharp';
 import { Resvg } from '@resvg/resvg-js';
 import { read } from '$app/server';
 import { getPosts } from '$lib/server/posts.js';
@@ -48,7 +47,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					{
 						type: 'div',
 						props: {
-							style: { display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' },
+							style: { display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '24px' },
 							children: [
 								{
 									type: 'img',
@@ -69,11 +68,17 @@ export const GET: RequestHandler = async ({ params }) => {
 					{
 						type: 'h1',
 						props: {
-							style: { fontFamily: 'JetBrains Mono', fontSize: '52px', margin: 0 },
+							style: { fontFamily: 'JetBrains Mono', fontSize: '56px', margin: 0 },
 							children: post.title
 						}
 					},
-					{ type: 'p', props: { style: { fontSize: '32px' }, children: post.description } },
+					{
+						type: 'p',
+						props: {
+							style: { fontSize: '40px', color: '#4c4f69', marginTop: '32px' },
+							children: post.description
+						}
+					},
 					createMetadataRow({
 						date: post.date,
 						readingTime: estimatedReadingTime.toString(),
@@ -102,14 +107,12 @@ export const GET: RequestHandler = async ({ params }) => {
 		}
 	);
 
-	const pngBuffer = new Resvg(svg).render().asPng();
-	const ogImage = await sharp(pngBuffer).jpeg({ quality: 100 }).toBuffer();
+	const ogImage = new Resvg(svg).render().asPng();
 
 	return new Response(ogImage, {
 		headers: {
-			'Content-Type': 'image/jpeg',
-			'Content-Disposition': 'inline',
-			'Cache-Control': 'public, max-age=31536000'
+			'Content-Type': 'image/png',
+			'Content-Disposition': 'inline'
 		}
 	});
 };

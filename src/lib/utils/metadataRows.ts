@@ -58,20 +58,20 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 						style: {
 							display: 'flex',
 							alignItems: 'center',
-							gap: '16px'
+							gap: '24px'
 						},
 						children: [
 							{
 								type: 'div',
 								props: {
-									style: { display: 'flex', alignItems: 'center', gap: '4px', fontSize: '28px' },
+									style: { display: 'flex', alignItems: 'center', gap: '8px', fontSize: '28px' },
 									children: [calendarIcon, { type: 'span', props: { children: post.date } }]
 								}
 							},
 							{
 								type: 'div',
 								props: {
-									style: { display: 'flex', alignItems: 'center', gap: '4px', fontSize: '28px' },
+									style: { display: 'flex', alignItems: 'center', gap: '8px', fontSize: '28px' },
 									children: [
 										clockIcon,
 										{ type: 'span', props: { children: `${post.readingTime} min read` } }
@@ -93,7 +93,7 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 									fontSize: '28px',
 									color: '#8839ef',
 									backgroundColor: 'rgba(136, 57, 239, 0.15)',
-									padding: '2px 6px',
+									padding: '2px 12px',
 									borderRadius: '4px'
 								},
 								children: `#${tag}`
