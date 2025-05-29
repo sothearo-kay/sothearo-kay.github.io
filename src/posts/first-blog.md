@@ -29,8 +29,8 @@ const book: Product = {
 
 ## Benefits
 
-| Feature        | Benefit                          |
-| -------------- | -------------------------------- |
-| Type safety    | Catch errors at compile time     |
-| Autocompletion | Better developer experience      |
-| Reusability    | Use the interface in many places |
+| Feature        | Benefit                          | Example                               | Related Tools/Concepts      |
+| -------------- | -------------------------------- | ------------------------------------- | --------------------------- |
+| Type safety    | Catch errors at compile time     | `user.age = "twenty"` → compile error | TypeScript, Flow            |
+| Autocompletion | Better developer experience      | IDE suggests `user.name`              | VS Code, IntelliSense       |
+| Reusability    | Use the interface in many places | Shared `User` interface across files  | TypeScript interfaces/types |
