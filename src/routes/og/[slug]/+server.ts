@@ -40,7 +40,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					height: '100%',
 					display: 'flex',
 					flexDirection: 'column',
-					padding: '10%',
+					padding: '40px',
 					backgroundColor: '#f7f9fc'
 				},
 				children: [
