@@ -1,10 +1,9 @@
 import satori from 'satori';
-import sharp from 'sharp';
 import { Resvg } from '@resvg/resvg-js';
 import { read } from '$app/server';
 import { getPosts } from '$lib/server/posts.js';
 import { createMetadataRow } from '$lib/utils/metadataRows';
-import { url as baseUrl } from '$lib/constants/config';
+import { site as siteName } from '$lib/constants/config';
 import Roboto from '$lib/fonts/Roboto-Regular.ttf';
 import JetBrains from '$lib/fonts/JetBrainsMono-Bold.ttf';
 import type { EntryGenerator, RequestHandler } from './$types';
@@ -61,7 +60,7 @@ export const GET: RequestHandler = async ({ params }) => {
 								},
 								{
 									type: 'p',
-									props: { style: { fontSize: '32px', color: '#9ca0b0' }, children: baseUrl }
+									props: { style: { fontSize: '32px', color: '#9ca0b0' }, children: siteName }
 								}
 							]
 						}
@@ -102,8 +101,7 @@ export const GET: RequestHandler = async ({ params }) => {
 		}
 	);
 
-	const pngBuffer = new Resvg(svg).render().asPng();
-	const ogImage = await sharp(pngBuffer).jpeg({ quality: 100 }).toBuffer();
+	const ogImage = new Resvg(svg).render().asPng();
 
 	return new Response(ogImage, {
 		headers: {
