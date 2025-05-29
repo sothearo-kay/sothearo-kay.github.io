@@ -1,4 +1,5 @@
 import satori from 'satori';
+import sharp from 'sharp';
 import { Resvg } from '@resvg/resvg-js';
 import { read } from '$app/server';
 import { getPosts } from '$lib/server/posts.js';
@@ -101,11 +102,12 @@ export const GET: RequestHandler = async ({ params }) => {
 		}
 	);
 
-	const ogImage = new Resvg(svg).render().asPng();
+	const pngBuffer = new Resvg(svg).render().asPng();
+	const ogImage = await sharp(pngBuffer).jpeg({ quality: 100 }).toBuffer();
 
 	return new Response(ogImage, {
 		headers: {
-			'Content-Type': 'image/png'
+			'Content-Type': 'image/jpeg'
 		}
 	});
 };
