@@ -18,7 +18,9 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:title" content={data.meta.title} />
 	<meta property="og:description" content={data.meta.description} />
-	<meta property="og:image" content={`${baseUrl}/og/${data.meta.slug}`} />
+	<meta property="og:image" content={`${baseUrl}/og/${page.params.slug}`} />
+	<meta property="og:url" content={`${baseUrl}/blog/${page.params.slug}`} />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta property="og:type" content="article" />
 </svelte:head>
 
