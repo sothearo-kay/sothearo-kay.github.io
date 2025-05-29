@@ -22,7 +22,7 @@
 	<meta property="og:image" content={`${baseUrl}/og/${page.params.slug}`} />
 	<meta property="og:url" content={`${baseUrl}/blog/${page.params.slug}`} />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta property="og:type" content="article" />
+	<meta property="og:type" content="website" />
 </svelte:head>
 
 <section class="grid grid-cols-[1fr_16rem] items-start gap-6">
