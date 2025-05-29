@@ -29,7 +29,7 @@ export const GET: RequestHandler = async ({ params }) => {
 	]);
 
 	const wordCount = rawContent.default.split(/\s+/).length;
-	const readingTime = Math.round(wordCount / 250);
+	const estimatedReadingTime = Math.ceil(wordCount / 250);
 
 	const svg = await satori(
 		{
@@ -47,7 +47,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					{
 						type: 'div',
 						props: {
-							style: { display: 'flex', alignItems: 'center', gap: '10px' },
+							style: { display: 'flex', alignItems: 'center', gap: '12px' },
 							children: [
 								{
 									type: 'img',
@@ -72,7 +72,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					{ type: 'p', props: { children: post.description } },
 					createMetadataRow({
 						date: post.date,
-						readingTime: readingTime.toString(),
+						readingTime: estimatedReadingTime.toString(),
 						tags: post.tags
 					})
 				]

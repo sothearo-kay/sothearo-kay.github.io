@@ -9,7 +9,7 @@
 
 	let { data }: PageProps = $props();
 
-	let wordCount = $derived(data.rawContent.split(' ').length);
+	let wordCount = $derived(data.rawContent.split(/\s+/).length);
 	let estimatedReadingTime = $derived(wordCount / 250);
 	let segments = $derived(page.url.pathname.split('/').filter(Boolean));
 </script>
@@ -36,7 +36,7 @@
 					</span>
 					<span class="inline-flex items-center gap-1">
 						<Clock class="h-4 w-4" />
-						{Math.round(estimatedReadingTime)} min read
+						{Math.ceil(estimatedReadingTime)} min read
 					</span>
 				</p>
 			</hgroup>

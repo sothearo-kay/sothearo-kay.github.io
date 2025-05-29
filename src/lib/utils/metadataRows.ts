@@ -59,7 +59,7 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 						style: {
 							display: 'flex',
 							alignItems: 'center',
-							gap: '10px'
+							gap: '16px'
 						},
 						children: [
 							{
