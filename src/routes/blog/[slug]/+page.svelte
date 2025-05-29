@@ -29,7 +29,7 @@
 		<article>
 			<hgroup>
 				<h1 class="font-mono text-3xl">{data.meta.title}</h1>
-				<p class="text-secondary mt-1 mb-2 flex gap-4 text-sm">
+				<p class="text-secondary my-2 flex gap-4 text-sm">
 					<span class="inline-flex items-center gap-1">
 						<Calendar class="h-4 w-4" />
 						{formatDate(data.meta.date)}
@@ -44,7 +44,9 @@
 			{#if data.meta.tags?.length}
 				<div class="flex gap-x-3 text-sm transition-colors">
 					{#each data.meta.tags as tag (tag)}
-						<span class="bg-highlight text-text-highlight rounded px-1 py-0.5 font-mono">
+						<span
+							class="bg-highlight text-text-highlight rounded px-1 py-0.5 font-mono font-medium"
+						>
 							&num;{tag}
 						</span>
 					{/each}

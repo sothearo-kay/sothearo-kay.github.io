@@ -25,7 +25,9 @@
 				{#if post.tags?.length}
 					<div class="flex gap-x-3 text-sm transition-colors">
 						{#each post.tags as tag (tag)}
-							<span class="bg-highlight text-text-highlight rounded px-1 py-0.5 font-mono">
+							<span
+								class="bg-highlight text-text-highlight rounded px-1 py-0.5 font-mono font-medium"
+							>
 								&num;{tag}
 							</span>
 						{/each}
