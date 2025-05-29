@@ -226,9 +226,11 @@
 		}
 
 		table {
-			overflow-x: auto;
+			display: block;
+			max-width: fit-content;
 			margin: 1rem;
-			padding: 1.5rem;
+			overflow-x: auto;
+			white-space: nowrap;
 			border-collapse: collapse;
 
 			th,
