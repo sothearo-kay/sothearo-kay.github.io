@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { formatDate } from '$lib/utils/date';
+	import { url as baseUrl } from '$lib/constants/config';
 	import { Calendar, Clock } from '@lucide/svelte';
 	import BreadCrumb from '$lib/components/breadCrumb.svelte';
 	import TableOfContents from '$lib/components/tableOfContents.svelte';
@@ -15,12 +16,14 @@
 
 <svelte:head>
 	<title>{data.meta.title}</title>
-	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
+	<meta property="og:description" content={data.meta.description} />
+	<meta property="og:image" content={`${baseUrl}/og/${data.meta.slug}`} />
+	<meta property="og:type" content="article" />
 </svelte:head>
 
 <section class="grid grid-cols-[1fr_16rem] items-start gap-6">
-	<div class="space-y-4">
+	<div class="space-y-4 max-lg:col-span-2">
 		<BreadCrumb {segments} currentTitle={data.meta.title} />
 
 		<article>
@@ -54,5 +57,7 @@
 		</article>
 	</div>
 
-	<TableOfContents headings={data.meta.headings} />
+	<div class="max-lg:hidden">
+		<TableOfContents headings={data.meta.headings} />
+	</div>
 </section>

@@ -2,6 +2,8 @@ import * as config from '$lib/constants/config';
 import { getPosts } from '$lib/server/posts';
 import type { RequestHandler } from './$types';
 
+export const prerender = true;
+
 export const GET: RequestHandler = () => {
 	const posts = getPosts();
 
@@ -39,5 +41,3 @@ export const GET: RequestHandler = () => {
 		}
 	});
 };
-
-export const prerender = true;
