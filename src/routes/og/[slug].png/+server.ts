@@ -4,9 +4,10 @@ import { read } from '$app/server';
 import { getPosts } from '$lib/server/posts.js';
 import { createMetadataRow } from '$lib/utils/metadataRows';
 import { site as siteName } from '$lib/constants/config';
-import Roboto from '$lib/fonts/Roboto-Regular.ttf';
-import JetBrains from '$lib/fonts/JetBrainsMono-Bold.ttf';
+import Inter from '$lib/fonts/Inter-Regular.ttf';
+import IBMPlexSans from '$lib/fonts/IBMPlexSans-Bold.ttf';
 import type { EntryGenerator, RequestHandler } from './$types';
+import { formatDate } from '$lib/utils/date';
 
 export const entries: EntryGenerator = () => {
 	const posts = getPosts();
@@ -22,9 +23,9 @@ export const GET: RequestHandler = async ({ params }) => {
 		return new Response('Not found', { status: 404 });
 	}
 
-	const [roboto, jetbrains, rawContent] = await Promise.all([
-		read(Roboto).arrayBuffer(),
-		read(JetBrains).arrayBuffer(),
+	const [inter, ibmPlexSans, rawContent] = await Promise.all([
+		read(Inter).arrayBuffer(),
+		read(IBMPlexSans).arrayBuffer(),
 		import(`$posts/${params.slug}.md?raw`)
 	]);
 
@@ -40,7 +41,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					height: '100%',
 					display: 'flex',
 					flexDirection: 'column',
-					padding: '32px',
+					padding: '40px',
 					backgroundColor: '#f7f9fc'
 				},
 				children: [
@@ -53,8 +54,8 @@ export const GET: RequestHandler = async ({ params }) => {
 									type: 'img',
 									props: {
 										src: 'https://api.dicebear.com/9.x/thumbs/png?seed=Sothearo&backgroundColor=000000',
-										width: 52,
-										height: 52,
+										width: 60,
+										height: 60,
 										style: { borderRadius: '9999px' }
 									}
 								},
@@ -68,7 +69,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					{
 						type: 'h1',
 						props: {
-							style: { fontFamily: 'JetBrains Mono', fontSize: '56px', margin: 0 },
+							style: { fontFamily: 'IBMPlex Sans', fontSize: '56px', margin: 0 },
 							children: post.title
 						}
 					},
@@ -80,7 +81,7 @@ export const GET: RequestHandler = async ({ params }) => {
 						}
 					},
 					createMetadataRow({
-						date: post.date,
+						date: formatDate(post.date),
 						readingTime: estimatedReadingTime.toString(),
 						tags: post.tags
 					})
@@ -92,14 +93,14 @@ export const GET: RequestHandler = async ({ params }) => {
 			height: 630,
 			fonts: [
 				{
-					name: 'Roboto',
-					data: roboto,
+					name: 'Inter',
+					data: inter,
 					weight: 400,
 					style: 'normal'
 				},
 				{
-					name: 'JetBrains Mono',
-					data: jetbrains,
+					name: 'IBMPlex Sans',
+					data: ibmPlexSans,
 					weight: 700,
 					style: 'normal'
 				}

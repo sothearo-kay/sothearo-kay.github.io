@@ -89,7 +89,6 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 							type: 'div',
 							props: {
 								style: {
-									fontFamily: 'JetBrains Mono',
 									fontSize: '28px',
 									color: '#8839ef',
 									backgroundColor: 'rgba(136, 57, 239, 0.15)',
