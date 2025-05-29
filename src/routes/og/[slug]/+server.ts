@@ -107,7 +107,9 @@ export const GET: RequestHandler = async ({ params }) => {
 
 	return new Response(ogImage, {
 		headers: {
-			'Content-Type': 'image/jpeg'
+			'Content-Type': 'image/jpeg',
+			'Content-Disposition': 'inline',
+			'Cache-Control': 'public, max-age=31536000'
 		}
 	});
 };
