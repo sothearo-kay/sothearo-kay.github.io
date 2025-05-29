@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { formatDate } from '$lib/utils/date';
-	import { url as baseUrl } from '$lib/constants/config';
+	import { url as baseUrl, site } from '$lib/constants/config';
 	import { Calendar, Clock } from '@lucide/svelte';
 	import BreadCrumb from '$lib/components/breadCrumb.svelte';
 	import TableOfContents from '$lib/components/tableOfContents.svelte';
@@ -15,14 +15,16 @@
 </script>
 
 <svelte:head>
-	<title>{data.meta.title}</title>
+	<title>{data.meta.title} | ${site}</title>
 	<link rel="canonical" href={`${baseUrl}/blog/${page.params.slug}`} />
+
 	<meta property="og:title" content={data.meta.title} />
 	<meta property="og:description" content={data.meta.description} />
-	<meta property="og:image" content={`${baseUrl}/og/${page.params.slug}`} />
+	<meta property="og:image" content={`${baseUrl}/og/${page.params.slug}.jpeg`} />
+	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:url" content={`${baseUrl}/blog/${page.params.slug}`} />
+	<meta property="og:type" content="article" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta property="og:type" content="website" />
 </svelte:head>
 
 <section class="grid grid-cols-[1fr_16rem] items-start gap-6">

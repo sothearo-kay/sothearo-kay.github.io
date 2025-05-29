@@ -8,20 +8,22 @@
 
 <svelte:head>
 	<title>Blog | {site}</title>
+	<link rel="canonical" href={`${baseUrl}/blog`} />
+
 	<meta
 		name="description"
 		content="Browse the latest articles and tutorials from the {site} blog."
 	/>
-	<link rel="canonical" href={`${baseUrl}/blog`} />
 	<meta property="og:title" content="Blog | {site}" />
 	<meta
 		property="og:description"
 		content="Read the latest updates, tutorials, and insights from {site}."
 	/>
 	<meta property="og:image" content="/blog-preview.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:url" content={`${baseUrl}/blog`} />
 	<meta property="og:type" content="website" />
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
 <section>
