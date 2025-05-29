@@ -40,7 +40,8 @@ export const GET: RequestHandler = async ({ params }) => {
 					height: '100%',
 					display: 'flex',
 					flexDirection: 'column',
-					padding: '40px',
+					padding: '16px',
+					paddingBottom: '24px',
 					backgroundColor: '#f7f9fc'
 				},
 				children: [
@@ -65,7 +66,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					{
 						type: 'h1',
 						props: {
-							style: { fontFamily: 'JetBrains Mono', margin: 0 },
+							style: { fontFamily: 'JetBrains Mono', fontSize: '26px', margin: 0 },
 							children: post.title
 						}
 					},
@@ -79,8 +80,8 @@ export const GET: RequestHandler = async ({ params }) => {
 			}
 		},
 		{
-			width: 1200,
-			height: 630,
+			width: 600,
+			height: 315,
 			fonts: [
 				{
 					name: 'Roboto',
