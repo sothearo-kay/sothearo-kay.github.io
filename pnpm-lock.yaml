@@ -8,18 +8,6 @@ importers:
 
   .:
     dependencies:
-      500.css:
-        specifier: link:@fontsource/jetbrains-mono/500.css
-        version: link:@fontsource/jetbrains-mono/500.css
-      700.css:
-        specifier: link:@fontsource/roboto/700.css
-        version: link:@fontsource/roboto/700.css
-      '@fontsource/jetbrains-mono':
-        specifier: ^5.2.5
-        version: 5.2.5
-      '@fontsource/roboto':
-        specifier: ^5.2.5
-        version: 5.2.5
       '@lucide/svelte':
         specifier: ^0.511.0
         version: 0.511.0(svelte@5.32.1)
@@ -36,6 +24,12 @@ importers:
       '@eslint/js':
         specifier: ^9.18.0
         version: 9.27.0
+      '@fontsource/jetbrains-mono':
+        specifier: ^5.2.5
+        version: 5.2.5
+      '@fontsource/roboto':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@resvg/resvg-js':
         specifier: ^2.6.2
         version: 2.6.2
