@@ -27,7 +27,7 @@
 	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
-<section class="grid grid-cols-[1fr_16rem] items-start gap-6">
+<section class="grid grid-cols-[minmax(1px,1fr)_16rem] items-start gap-6">
 	<div class="space-y-4 max-lg:col-span-2">
 		<BreadCrumb {segments} currentTitle={data.meta.title} />
 
@@ -64,7 +64,7 @@
 		</article>
 	</div>
 
-	<div class="max-lg:hidden">
+	<div class="sticky top-17 max-lg:hidden">
 		<TableOfContents headings={data.meta.headings} />
 	</div>
 </section>

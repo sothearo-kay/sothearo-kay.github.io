@@ -9,7 +9,7 @@ import rehypeSlug from 'rehype-slug';
 const themes = ['catppuccin-latte', 'catppuccin-mocha']; // light and dark
 const highlighter = await createHighlighter({
 	themes,
-	langs: ['javascript', 'typescript']
+	langs: ['javascript', 'typescript', 'yaml']
 });
 
 /** @type {import('mdsvex').MdsvexOptions} */

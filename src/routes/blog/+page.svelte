@@ -19,8 +19,6 @@
 		property="og:description"
 		content="Read the latest updates, tutorials, and insights from {site}."
 	/>
-	<!-- <meta property="og:image" content="/blog-preview.jpg" /> -->
-	<!-- <meta property="og:image:type" content="image/jpeg" /> -->
 	<meta property="og:url" content={`${baseUrl}/blog`} />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
