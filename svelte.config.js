@@ -1,14 +1,15 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { join } from 'path';
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
-import { join } from 'path';
+import { transformerNotationDiff, transformerNotationHighlight } from '@shikijs/transformers';
 import { remarkHeadings } from './plugins/remark-headings.js';
+import rehypeShiki from '@shikijs/rehype';
 import rehypeSlug from 'rehype-slug';
 
-const themes = ['catppuccin-latte', 'catppuccin-mocha']; // light and dark
 const highlighter = await createHighlighter({
-	themes,
+	themes: ['catppuccin-latte', 'catppuccin-mocha'], // light and dark
 	langs: ['javascript', 'typescript', 'yaml']
 });
 
@@ -16,9 +17,20 @@ const highlighter = await createHighlighter({
 const mdsvexOptions = {
 	extensions: ['.md'],
 	remarkPlugins: [remarkHeadings],
-	rehypePlugins: [rehypeSlug],
+	rehypePlugins: [
+		rehypeSlug,
+		[
+			rehypeShiki,
+			{
+				transformers: [
+					transformerNotationDiff({ matchAlgorithm: 'v3' }),
+					transformerNotationHighlight({ matchAlgorithm: 'v3' })
+				]
+			}
+		]
+	],
 	highlight: {
-		highlighter: async (code, lang = 'text') => {
+		highlighter: async (code, lang) => {
 			const html = escapeSvelte(
 				highlighter.codeToHtml(code, {
 					lang,
