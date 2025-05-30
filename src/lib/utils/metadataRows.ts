@@ -92,8 +92,8 @@ export function createMetadataRow(post: { date: string; readingTime: string; tag
 									fontSize: '28px',
 									color: '#8839ef',
 									backgroundColor: 'rgba(136, 57, 239, 0.15)',
-									padding: '2px 12px',
-									borderRadius: '4px'
+									padding: '6px 12px',
+									borderRadius: '10px'
 								},
 								children: `#${tag}`
 							}

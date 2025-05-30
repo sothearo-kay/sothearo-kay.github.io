@@ -41,7 +41,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					height: '100%',
 					display: 'flex',
 					flexDirection: 'column',
-					padding: '40px',
+					padding: '48px',
 					backgroundColor: '#f7f9fc'
 				},
 				children: [
@@ -69,7 +69,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					{
 						type: 'h1',
 						props: {
-							style: { fontFamily: 'IBMPlex Sans', fontSize: '56px', margin: 0 },
+							style: { fontFamily: 'IBMPlex Sans', fontSize: '64px', lineHeight: 1.2, margin: 0 },
 							children: post.title
 						}
 					},
