@@ -12,21 +12,29 @@
 	let visibleSlugs = $state<string[]>([]);
 
 	onMount(() => {
-		const visibleSet = new Set<string>();
+		const visibilityMap = new Map<string, boolean>();
 		const observer = new IntersectionObserver(
 			(entries) => {
 				for (const entry of entries) {
 					const slug = entry.target.id;
 					if (!slug) continue;
 
-					if (entry.isIntersecting) {
-						visibleSet.add(slug);
-					} else {
-						visibleSet.delete(slug);
+					visibilityMap.set(slug, entry.isIntersecting);
+				}
+
+				const visible = headings.map((h) => h.slug).filter((slug) => visibilityMap.get(slug));
+
+				let deepestIndex = -1;
+				for (const slug of visible) {
+					const index = headings.findIndex((h) => h.slug === slug);
+					if (index > deepestIndex) {
+						deepestIndex = index;
 					}
 				}
 
-				visibleSlugs = [...visibleSet];
+				if (deepestIndex >= 0) {
+					visibleSlugs = headings.slice(0, deepestIndex + 1).map((h) => h.slug);
+				}
 			},
 			{
 				rootMargin: '0px 0px -20% 0px',
@@ -50,7 +58,7 @@
 	}
 </script>
 
-<nav aria-label="Table of Contents" class="sticky top-17 p-4">
+<nav aria-label="Table of Contents">
 	<button class="flex w-full items-center justify-between" onclick={() => (collapsed = !collapsed)}>
 		<p class="font-mono font-medium">Table of Contents</p>
 		<ChevronRight
