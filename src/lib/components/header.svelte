@@ -36,7 +36,7 @@
 			</ul>
 		</nav>
 
-		<div class="flex items-center gap-3">
+		<div class="flex items-center justify-end gap-3">
 			<button
 				aria-label="Link to GitHub"
 				class="flex-center h-8 w-8 rounded-full border"

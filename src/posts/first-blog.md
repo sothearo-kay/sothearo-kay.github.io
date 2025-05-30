@@ -1,6 +1,5 @@
 ---
 title: 'Understanding TypeScript Interfaces'
-slug: 'typescript-interfaces'
 description: 'A brief introduction to TypeScript interfaces with an example.'
 date: '2025-05-27'
 tags: ['typescript', 'interfaces']
