@@ -318,7 +318,7 @@
 			}
 
 			&::-webkit-scrollbar-thumb {
-				background-color: var(--color-highlight);
+				background-color: var(--color-tertiary);
 				border-radius: 8px;
 				border: 2px solid var(--color-bg);
 			}
@@ -329,7 +329,7 @@
 
 			@supports (scrollbar-color: auto) {
 				scrollbar-width: thin;
-				scrollbar-color: var(--color-highlight) var(--color-bg);
+				scrollbar-color: var(--color-tertiary) var(--color-bg);
 			}
 		}
 	}
