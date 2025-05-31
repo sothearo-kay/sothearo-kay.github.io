@@ -14,6 +14,7 @@ Interfaces in TypeScript are a powerful way to define the structure of an object
 interface Product {
 	id: number;
 	name: string;
+	// [!code highlight:2]
 	price: number;
 	inStock: boolean;
 }
