@@ -11,10 +11,10 @@ Interfaces in TypeScript are a powerful way to define the structure of an object
 ## Example
 
 ```ts
-// [\!code highlight:3]
 interface Product {
 	id: number;
 	name: string;
+	// [!code highlight:2]
 	price: number;
 	inStock: boolean;
 }

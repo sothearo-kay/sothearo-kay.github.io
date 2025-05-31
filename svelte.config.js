@@ -5,7 +5,6 @@ import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
 import { transformerNotationDiff, transformerNotationHighlight } from '@shikijs/transformers';
 import { remarkHeadings } from './plugins/remark-headings.js';
-import rehypeShiki from '@shikijs/rehype';
 import rehypeSlug from 'rehype-slug';
 
 const highlighter = await createHighlighter({
@@ -17,27 +16,18 @@ const highlighter = await createHighlighter({
 const mdsvexOptions = {
 	extensions: ['.md'],
 	remarkPlugins: [remarkHeadings],
-	rehypePlugins: [
-		rehypeSlug,
-		[
-			rehypeShiki,
-			{
-				transformers: [
-					transformerNotationDiff({ matchAlgorithm: 'v3' }),
-					transformerNotationHighlight({ matchAlgorithm: 'v3' })
-				]
-			}
-		]
-	],
+	rehypePlugins: [rehypeSlug],
 	highlight: {
-		highlighter: async (code, lang) => {
+		highlighter: async (code, lang = 'text', meta) => {
 			const html = escapeSvelte(
 				highlighter.codeToHtml(code, {
 					lang,
 					themes: {
 						light: 'catppuccin-latte',
 						dark: 'catppuccin-mocha'
-					}
+					},
+					...(meta && { meta: { __raw: meta } }),
+					transformers: [transformerNotationDiff(), transformerNotationHighlight()]
 				})
 			);
 

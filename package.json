@@ -19,7 +19,6 @@
 		"@fontsource/jetbrains-mono": "^5.2.5",
 		"@fontsource/roboto": "^5.2.5",
 		"@resvg/resvg-js": "^2.6.2",
-		"@shikijs/rehype": "^3.4.2",
 		"@shikijs/transformers": "^3.4.2",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.16.0",
