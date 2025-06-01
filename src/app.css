@@ -12,6 +12,7 @@
 	--color-text-highlight: var(--color-text-highlight);
 	--color-table-heading: var(--color-table-heading);
 	--color-muted: var(--color-muted);
+	--color-border-muted: var(--color-border-muted);
 }
 
 @theme {
@@ -38,6 +39,14 @@
 		--color-text-highlight: #8839ef;
 		--color-table-heading: #2a2a2a;
 		--color-muted: #a0a2ad;
+		--color-border-muted: #e5e7eb;
+
+		--shiki-text-highlight: #8839ef;
+		--shiki-highlight: rgba(136, 57, 239, 0.1);
+		--shiki-diff-add: #40a02b;
+		--shiki-diff-add-bg: rgba(64, 160, 43, 0.1);
+		--shiki-diff-remove: #d20f39;
+		--shiki-diff-remove-bg: rgba(210, 15, 57, 0.1);
 
 		@variant dark {
 			--color-bg: #11111b;
@@ -48,6 +57,7 @@
 			--color-text-highlight: #cba6f7;
 			--color-table-heading: #e2e8f0;
 			--color-muted: #7f869b;
+			--color-border-muted: #374151;
 		}
 	}
 
@@ -60,12 +70,30 @@
 		text-decoration: var(--shiki-dark-text-decoration) !important;
 	}
 
-	html.dark .shiki span.line.highlighted {
-		background-color: var(--color-highlight) !important;
+	html.dark .shiki span.line:is(.highlighted, .diff) {
+		background-color: var(--shiki-highlight) !important;
 
 		& > span {
 			background-color: transparent !important;
 		}
+	}
+
+	html.dark .shiki span.line.diff {
+		&.add {
+			background-color: var(--shiki-diff-add-bg) !important;
+		}
+
+		&.remove {
+			background-color: var(--shiki-diff-remove-bg) !important;
+		}
+
+		& > span {
+			background-color: transparent !important;
+		}
+	}
+
+	html.dark .shiki span.line .highlighted-word {
+		background-color: var(--color-highlight) !important;
 	}
 
 	*,
@@ -96,6 +124,7 @@
 	body {
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
 		transition: 150ms;
 	}
 
@@ -232,9 +261,10 @@
 			overflow-x: auto;
 			padding-block: 10px;
 			border-radius: 10px;
+			border: 1px solid var(--color-border-muted);
 			tab-size: 2;
 			transition: 150ms;
-			transition-property: color, background-color;
+			transition-property: border-color, background-color;
 
 			& > code {
 				display: grid;
@@ -251,14 +281,14 @@
 				font-size: 0.875rem;
 				letter-spacing: 0.05em;
 
+				& .highlighted-word {
+					background-color: var(--color-highlight);
+					border-radius: 4px;
+				}
+
 				&.line {
 					padding-inline: 0.5rem;
 					border-left: 3px solid transparent;
-
-					&.highlighted {
-						border-color: var(--color-text-highlight);
-						background-color: var(--color-highlight);
-					}
 
 					&::before {
 						content: counter(line);
@@ -268,6 +298,23 @@
 						display: inline-block;
 						text-align: right;
 						color: var(--color-muted);
+					}
+
+					&.highlighted {
+						border-color: var(--shiki-text-highlight);
+						background-color: var(--shiki-highlight);
+					}
+
+					&.diff {
+						&.add {
+							border-left-color: var(--shiki-diff-add);
+							background-color: var(--shiki-diff-add-bg);
+						}
+
+						&.remove {
+							border-left-color: var(--shiki-diff-remove);
+							background-color: var(--shiki-diff-remove-bg);
+						}
 					}
 				}
 			}
