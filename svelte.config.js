@@ -3,7 +3,13 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { join } from 'path';
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
-import { transformerNotationDiff, transformerNotationHighlight } from '@shikijs/transformers';
+import {
+	transformerMetaHighlight,
+	transformerMetaWordHighlight,
+	transformerNotationDiff,
+	transformerNotationHighlight,
+	transformerNotationWordHighlight
+} from '@shikijs/transformers';
 import { remarkHeadings } from './plugins/remark-headings.js';
 import rehypeSlug from 'rehype-slug';
 
@@ -27,7 +33,15 @@ const mdsvexOptions = {
 						dark: 'catppuccin-mocha'
 					},
 					...(meta && { meta: { __raw: meta } }),
-					transformers: [transformerNotationDiff(), transformerNotationHighlight()]
+					transformers: [
+						...(meta
+							? [transformerMetaHighlight(), transformerMetaWordHighlight()]
+							: [
+									transformerNotationDiff(),
+									transformerNotationHighlight(),
+									transformerNotationWordHighlight()
+								])
+					]
 				})
 			);
 
