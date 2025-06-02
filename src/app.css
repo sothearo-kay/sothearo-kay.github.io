@@ -61,41 +61,6 @@
 		}
 	}
 
-	html.dark .shiki,
-	html.dark .shiki span {
-		color: var(--shiki-dark) !important;
-		background-color: var(--shiki-dark-bg) !important;
-		font-style: var(--shiki-dark-font-style) !important;
-		font-weight: var(--shiki-dark-font-weight) !important;
-		text-decoration: var(--shiki-dark-text-decoration) !important;
-	}
-
-	html.dark .shiki span.line:is(.highlighted, .diff) {
-		background-color: var(--shiki-highlight) !important;
-
-		& > span {
-			background-color: transparent !important;
-		}
-	}
-
-	html.dark .shiki span.line.diff {
-		&.add {
-			background-color: var(--shiki-diff-add-bg) !important;
-		}
-
-		&.remove {
-			background-color: var(--shiki-diff-remove-bg) !important;
-		}
-
-		& > span {
-			background-color: transparent !important;
-		}
-	}
-
-	html.dark .shiki span.line .highlighted-word {
-		background-color: var(--color-highlight) !important;
-	}
-
 	*,
 	::after,
 	::before,
@@ -125,7 +90,6 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-rendering: optimizeLegibility;
-		transition: 150ms;
 	}
 
 	h1,
@@ -192,6 +156,21 @@
 
 	.underline-swipe:hover {
 		background-size: 100% var(--underline-height);
+	}
+
+	.dark pre,
+	.dark pre span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
+
+	.dark pre span.line:is(.highlighted, .diff) {
+		& > span {
+			background-color: transparent !important;
+		}
 	}
 
 	.prose {
@@ -263,8 +242,6 @@
 			border-radius: 10px;
 			border: 1px solid var(--color-border-muted);
 			tab-size: 2;
-			transition: 150ms;
-			transition-property: border-color, background-color;
 
 			& > code {
 				display: grid;
@@ -302,18 +279,18 @@
 
 					&.highlighted {
 						border-color: var(--shiki-text-highlight);
-						background-color: var(--shiki-highlight);
+						background-color: var(--shiki-highlight) !important;
 					}
 
 					&.diff {
 						&.add {
 							border-left-color: var(--shiki-diff-add);
-							background-color: var(--shiki-diff-add-bg);
+							background-color: var(--shiki-diff-add-bg) !important;
 						}
 
 						&.remove {
 							border-left-color: var(--shiki-diff-remove);
-							background-color: var(--shiki-diff-remove-bg);
+							background-color: var(--shiki-diff-remove-bg) !important;
 						}
 					}
 				}

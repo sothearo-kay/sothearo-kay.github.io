@@ -76,7 +76,7 @@
 			{#each headings as { text, slug, depth } (slug)}
 				<li
 					class={[
-						'hover:text-foreground ml-[var(--size)] font-sans font-bold transition-colors duration-300',
+						'hover:text-foreground ml-[var(--size)] font-sans font-bold transition-colors duration-[250ms]',
 						{ 'text-muted': !visibleSlugs.includes(slug) }
 					]}
 					style="--size: calc(1rem * {depth});"
