@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { formatDate } from '$lib/utils/date';
+	import { getResizedImageUrl } from '$lib/utils/image';
 	import { url as baseUrl, site } from '$lib/constants/config';
 	import { Calendar, Clock } from '@lucide/svelte';
 	import BreadCrumb from '$lib/components/breadCrumb.svelte';
@@ -20,7 +21,7 @@
 
 	<meta property="og:title" content={data.meta.title} />
 	<meta property="og:description" content={data.meta.description} />
-	<meta property="og:image" content={data.meta.image || `${baseUrl}/og/${page.params.slug}.png`} />
+	<meta property="og:image" content={data.meta.image ? getResizedImageUrl(data.meta.image) : `${baseUrl}/og/${page.params.slug}.png`} />
 	<meta property="og:url" content={`${baseUrl}/blog/${page.params.slug}`} />
 	<meta property="og:type" content="article" />
 	<meta name="twitter:card" content="summary_large_image" />

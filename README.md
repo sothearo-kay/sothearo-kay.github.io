@@ -1,38 +1,116 @@
-# sv
+# Sothearo's Personal Website
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern personal website and blog built with SvelteKit, featuring TypeScript support, MDX content, and automated deployment to GitHub Pages.
 
-## Creating a project
+🌍 **Live Site**: [https://sothearo-kay.github.io](https://sothearo-kay.github.io)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Features
+
+- **Modern Stack**: Built with SvelteKit 2.0 and TypeScript
+- **MDX Blog**: Write blog posts in Markdown with frontmatter support
+- **Dark/Light Theme**: Automatic theme switching with system preference detection
+- **Static Site Generation**: Optimized for GitHub Pages deployment
+- **Responsive Design**: Fully responsive layout with Tailwind CSS
+- **SEO Optimized**: Meta tags, OpenGraph images, and RSS feed
+- **Code Highlighting**: Syntax highlighting with Shiki
+- **Type Safety**: Full TypeScript support throughout
+
+## Content
+
+The site includes:
+
+- Personal homepage with avatar and introduction
+- Blog section with technical posts about TypeScript, deployment, and more
+- Projects showcase
+- RSS feed for blog content
+
+## Tech Stack
+
+- **Framework**: SvelteKit with static adapter
+- **Styling**: Tailwind CSS 4.0
+- **Content**: MDSvex for Markdown processing
+- **Code Highlighting**: Shiki with custom transformers
+- **Icons**: Lucide Svelte
+- **Fonts**: Inter and IBM Plex Sans
+- **Package Manager**: pnpm
+- **Deployment**: GitHub Actions → GitHub Pages
+
+## Development
 
 ```bash
-# create a new project in the current directory
-npx sv create
+# Install dependencies
+pnpm install
 
-# create a new project in my-app
-npx sv create my-app
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Code Quality
 
 ```bash
-npm run dev
+# Format code
+pnpm format
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Lint code
+pnpm lint
+
+# Type check
+pnpm check
 ```
 
-## Building
+## Deployment
 
-To create a production version of your app:
+This site automatically deploys to GitHub Pages via GitHub Actions when changes are pushed to the `master` branch. The workflow:
 
-```bash
-npm run build
+1. Builds the static site with `pnpm build`
+2. Uploads the build artifacts
+3. Deploys to GitHub Pages
+
+## Project Structure
+
+```
+src/
+├── lib/
+│   ├── components/     # Reusable Svelte components
+│   ├── constants/      # Site configuration
+│   ├── server/         # Server-side utilities
+│   └── utils/          # Helper functions
+├── posts/              # Blog posts in Markdown
+├── routes/             # SvelteKit routes
+│   ├── blog/           # Blog listing and post pages
+│   ├── projects/       # Projects page
+│   └── og/             # OpenGraph image generation
+└── static/             # Static assets
 ```
 
-You can preview the production build with `npm run preview`.
+## Adding Content
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### Blog Posts
+
+Create new blog posts in `src/posts/` with frontmatter:
+
+```markdown
+---
+title: 'Your Post Title'
+description: 'Brief description'
+tags: ['tag1', 'tag2']
+published: true
+image: 'https://example.com/image.jpg'
+---
+
+Your content here...
+```
+
+### Projects
+
+Add projects by editing `src/routes/projects/+page.svelte`.
+
+## License
+
+This project is for personal use. Feel free to use it as inspiration for your own site!
