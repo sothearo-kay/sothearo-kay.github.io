@@ -12,4 +12,5 @@ export type PostMetadata = {
 	tags: string[];
 	published: boolean;
 	headings: HeadingData[];
+	image?: string;
 };

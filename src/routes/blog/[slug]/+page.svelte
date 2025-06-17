@@ -20,7 +20,7 @@
 
 	<meta property="og:title" content={data.meta.title} />
 	<meta property="og:description" content={data.meta.description} />
-	<meta property="og:image" content={`${baseUrl}/og/${page.params.slug}.png`} />
+	<meta property="og:image" content={data.meta.image || `${baseUrl}/og/${page.params.slug}.png`} />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:url" content={`${baseUrl}/blog/${page.params.slug}`} />
 	<meta property="og:type" content="article" />

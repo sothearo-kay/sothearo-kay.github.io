@@ -4,6 +4,7 @@ description: 'A brief introduction to TypeScript interfaces with an example.'
 date: '2025-05-27'
 tags: ['typescript', 'interfaces']
 published: true
+image: https://www.ghibli.jp/gallery/yamada050.jpg
 ---
 
 Interfaces in TypeScript are a powerful way to define the structure of an object.
