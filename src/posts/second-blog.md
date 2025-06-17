@@ -3,6 +3,7 @@ title: 'Deploying to GitHub Pages with pnpm'
 description: 'Learn how to deploy a static site built with pnpm to GitHub Pages using GitHub Actions.'
 tags: [deployment, github-actions, pnpm]
 published: true
+image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBk6OIFpDMenW7CUn5kaocIvNHAHc6piVkXQ&s
 ---
 
 In this post, we'll explore how to deploy a static site built with pnpm to **GitHub Pages** using **GitHub Actions**.
