@@ -21,8 +21,6 @@
 	<meta property="og:title" content={data.meta.title} />
 	<meta property="og:description" content={data.meta.description} />
 	<meta property="og:image" content={data.meta.image || `${baseUrl}/og/${page.params.slug}.png`} />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
 	<meta property="og:url" content={`${baseUrl}/blog/${page.params.slug}`} />
 	<meta property="og:type" content="article" />
 	<meta name="twitter:card" content="summary_large_image" />
