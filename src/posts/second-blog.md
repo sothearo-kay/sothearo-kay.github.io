@@ -1,7 +1,6 @@
 ---
 title: 'Using Union Types in TypeScript'
 description: 'Learn how union types add flexibility to your TypeScript types.'
-date: '2025-05-27'
 tags: ['typescript', 'types']
 published: true
 ---

@@ -1,3 +1,4 @@
+import { statSync } from 'fs';
 import type { PostMetadata } from '$lib/types/post';
 
 export function getPosts() {
@@ -11,7 +12,16 @@ export function getPosts() {
 
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = file.metadata as Omit<PostMetadata, 'slug'>;
-			const post = { ...metadata, slug } satisfies PostMetadata;
+
+			// Use file creation date as fallback if no date provided
+			let date = metadata.date;
+			if (!date) {
+				const filePath = path.replace('/src', 'src');
+				const stats = statSync(filePath);
+				date = stats.birthtime.toISOString();
+			}
+
+			const post = { ...metadata, slug, date } satisfies PostMetadata;
 			if (post.published) posts.push(post);
 		}
 	}

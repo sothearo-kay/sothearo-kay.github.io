@@ -12,7 +12,7 @@ type RawMarkdownModule = {
 	default: string;
 };
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ params, data }) => {
 	try {
 		const [post, rawContent] = await Promise.all([
 			import(`$posts/${params.slug}.md`) as Promise<MarkdownModule>,
@@ -21,7 +21,7 @@ export const load: PageLoad = async ({ params }) => {
 
 		return {
 			content: post.default,
-			meta: post.metadata,
+			meta: { ...post.metadata, date: data.date },
 			rawContent: rawContent.default
 		};
 	} catch {

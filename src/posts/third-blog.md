@@ -1,7 +1,6 @@
 ---
 title: 'Deploying to GitHub Pages with pnpm'
 description: 'Learn how to deploy a static site built with pnpm to GitHub Pages using GitHub Actions.'
-date: '2025-05-30'
 tags: [deployment, github-actions, pnpm]
 published: true
 ---
