@@ -50,13 +50,13 @@
 {/snippet}
 
 <div class="relative w-full" role="region" aria-label="Technologies and programming languages">
-	<Marquee pauseOnHover={true} duration={30} gap="1.5rem">
+	<Marquee pauseOnHover duration={20} gap="2rem">
 		{#each firstRow as tech (tech.name)}
 			{@render techIcon(tech)}
 		{/each}
 	</Marquee>
 
-	<Marquee pauseOnHover={true} duration={30} gap="1.5rem" reverse={true}>
+	<Marquee pauseOnHover reverse duration={20} gap="2rem">
 		{#each secondRow as tech (tech.name)}
 			{@render techIcon(tech)}
 		{/each}
