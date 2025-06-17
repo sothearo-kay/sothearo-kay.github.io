@@ -1,32 +1,76 @@
 ---
-title: 'Using Union Types in TypeScript'
-description: 'Learn how union types add flexibility to your TypeScript types.'
-tags: ['typescript', 'types']
+title: 'Deploying to GitHub Pages with pnpm'
+description: 'Learn how to deploy a static site built with pnpm to GitHub Pages using GitHub Actions.'
+tags: [deployment, github-actions, pnpm]
 published: true
 ---
 
-Union types allow a value to be one of several types.
+In this post, we'll explore how to deploy a static site built with pnpm to **GitHub Pages** using **GitHub Actions**.
 
-## Example
+## Steps to Set Up Deployment
 
-```ts
-type Status = 'loading' | 'success' | 'error';
+1. Set up your `pnpm` project and build script.
+2. Create a `.github/workflows/deploy.yml` file.
+3. Configure GitHub Pages to deploy from `GitHub Actions`.
+4. Push your changes to the `master` branch.
 
-function showStatus(status: Status) {
-	if (status === 'loading') {
-		console.log('Loading...');
-	} else if (status === 'success') {
-		console.log('Data loaded.');
-	} else {
-		console.log('Something went wrong.');
-	}
-}
+## GitHub Actions Workflow File
+
+Here’s a sample `deploy.yml` file:
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install
+      - run: pnpm build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages name
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: \${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
 ```
 
-## Use Cases
+## Common Issues and Fixes
 
-| Use Case      | Description                       |
-| ------------- | --------------------------------- |
-| API status    | Represent multiple loading states |
-| Input options | Allow limited user input choices  |
-| Flexibility   | Combine multiple accepted types   |
+| Issue                 | Possible Cause                             | Solution                                   |
+| --------------------- | ------------------------------------------ | ------------------------------------------ |
+| Duplicate deployments | Multiple workflows or manual re-runs       | Check your Actions tab and remove extras   |
+| Deploy not triggered  | Wrong branch or misnamed workflow file     | Ensure `on.push.branches` is correctly set |
+| 404 after deploy      | Wrong `build` path or missing `index.html` | Set correct `path: build` and check output |

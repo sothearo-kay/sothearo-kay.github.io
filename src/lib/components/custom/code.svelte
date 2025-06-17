@@ -23,7 +23,7 @@
 		disabled={hasCopied.value}
 		class={[
 			'flex-center absolute top-3 right-3 z-10 h-8 w-8 rounded border opacity-0 transition-[opacity,border-color]',
-			' hover:enabled:border-text-highlight group-hover:opacity-100 disabled:cursor-not-allowed'
+			'hover:enabled:border-text-highlight group-hover:opacity-100 disabled:cursor-not-allowed'
 		]}
 		onclick={copyToClipboard}
 	>

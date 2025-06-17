@@ -1,4 +1,4 @@
-import { statSync } from 'fs';
+import { execSync } from 'child_process';
 import type { PostMetadata } from '$lib/types/post';
 
 export function getPosts() {
@@ -13,12 +13,21 @@ export function getPosts() {
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = file.metadata as Omit<PostMetadata, 'slug'>;
 
-			// Use file creation date as fallback if no date provided
+			// Use git creation date as fallback if no date provided
 			let date = metadata.date;
 			if (!date) {
 				const filePath = path.replace('/src', 'src');
-				const stats = statSync(filePath);
-				date = stats.birthtime.toISOString();
+				try {
+					const gitDate = execSync(`git log --reverse --format=%ai -- "${filePath}"`, {
+						encoding: 'utf8'
+					})
+						.trim()
+						.split('\n')[0];
+					date = new Date(gitDate).toISOString();
+				} catch {
+					// Fallback to current date if git command fails
+					date = new Date().toISOString();
+				}
 			}
 
 			const post = { ...metadata, slug, date } satisfies PostMetadata;
