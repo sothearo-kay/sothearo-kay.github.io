@@ -68,8 +68,8 @@
 
 	<div
 		class={[
-			'mt-1 grid transition-[grid-template-rows] duration-500',
-			collapsed ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]'
+			'mt-1 grid transition-[grid-template-rows,opacity] duration-300 ease-in-out',
+			collapsed ? 'grid-rows-[0fr] opacity-0' : 'grid-rows-[1fr] opacity-100'
 		]}
 	>
 		<ul class="space-y-0.5 overflow-hidden">
